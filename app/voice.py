@@ -1,8 +1,5 @@
-import os
-from pytgcalls import PyTgCalls, idle
-from pytgcalls.types import Update
-from pytgcalls.types.input_stream import InputStream
-from pytgcalls.types.input_stream import AudioPiped
+from pytgcalls import PyTgCalls
+from pytgcalls.types import AudioPiped
 
 client_call = None
 
@@ -12,11 +9,10 @@ def init_calls(client):
     return client_call
 
 async def join_vc(chat_id):
+    # подключаемся в голосовой чат с заглушкой
     await client_call.join_group_call(
         chat_id,
-        InputStream(
-            AudioPiped("silence.mp3")  # заглушка
-        )
+        AudioPiped("silence.mp3")
     )
 
 async def leave_vc(chat_id):
